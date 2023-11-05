@@ -9,8 +9,38 @@
 		<title>Hi, I'm Tomo</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+
+		<!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css"> -->
 		<link rel="stylesheet" href="assets/css/main.css" />
+
 		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+
+		<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+		<script type="text/javascript">
+			(function() {
+					emailjs.init('IMQugmaB2tpgq4OXM');
+			})();
+		</script>
+		<script>
+			window.onload = function() {
+				document.getElementById('contact-form').addEventListener('submit', function(event) {
+					event.preventDefault();
+					this.contact_number.value = Math.random() * 100000 | 0;
+
+					document.querySelector('.contact-message-success').style.display = 'none';
+					document.querySelector('.contact-message-failure').style.display = 'none';
+					
+					emailjs.sendForm('service_zee2ofh', 'template_vn4cxei', this)
+						.then(function() {
+							document.querySelector('.contact-message-success').style.display = 'block';
+							console.log(`Successfully send a contact form!`);
+						}, function(error) {
+							document.querySelector('.contact-message-failure').style.display = 'block';
+							console.error(`Failed to a send contact form ...`, error);
+						});
+				});
+			}
+		</script>
 	</head>
 	<body class="is-preload">
 
@@ -56,29 +86,31 @@
 									and my primary development language is JavaScript/TypeScript these days but also
 									somewhat familiar with Java as well.
 								</p>
-								<p>(translate it to Japanese later?)</p>
+								<p>
+									Currently I'm looking after 2 product teams (total of 7 fulltime developers and some interns),
+									and I love working with people to give them some support for their innovative mind/desire. 
+								</p>
 							</article>
 
 						<!-- Work -->
 							<article id="work">
 								<h2 class="major">Work/Presentation</h2>
 								<span class="image main"><img src="images/pic02.jpg" alt="" /></span>
-								<p>List of presentations</p>
+								<h3>Presentation</h3>
 								<ul>
 									<li>title 1</li>
 									<li>title 2</li>
 									<li>title 3</li>
 								</ul>
-								<p>List of works</p>
+								<h3>Work</h3>
 								<ul>
-									<li>work 1</li>
-									<li>work 2</li>
-									<li>work 3</li>
+									<li>Ontario Teachers' Pension Plan (2007 Oct - present)</li>
+									<li>Cube Route (2005 May - 2007 Sep)</li>
 								</ul>
-								<p>List of personal projects</p>
+								<h3>Personal project</h3>
 								<ul>
-									<li>Dungeon Wonders (Android, Java)</li>
-									<li>TK Bookmark App (Stencil, NestJS, JavaScript/TypeScript)</li>
+									<li>Dungeon Wonders (Android - Java)</li>
+									<li>TK Bookmark App (Stencil, NestJS - JavaScript/TypeScript)</li>
 									<li>project 3</li>
 								</ul>
 							</article>
@@ -93,7 +125,20 @@
 						<!-- Contact -->
 							<article id="contact">
 								<h2 class="major">Contact</h2>
-								<form method="post" action="#">
+								<form id="contact-form">
+									<div
+										style="display: none"
+										class="contact-message contact-message-success">
+										<i class="icon fa-check-circle"></i>
+										Thank you for your message!
+									</div>
+									<div
+										style="display: none" 
+										class="contact-message contact-message-failure">
+										<i class="icon fa-times-circle"></i>
+										Oops, somehow something went wrong, please try again later
+									</div>
+									<input type="hidden" name="contact_number">
 									<div class="fields">
 										<div class="field half">
 											<label for="name">Name</label>

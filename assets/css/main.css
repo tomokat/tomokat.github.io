@@ -1659,3 +1659,18 @@ input, select, textarea {
 		body.is-preload #footer {
 			opacity: 0;
 		}
+
+
+		.contact-message {
+			padding: 10px;
+			font-size: 20px;
+		}
+
+		.contact-message-success {
+			background: cornflowerblue;
+		}
+
+		.contact-message-failure {
+			background: coral;
+		}
+
